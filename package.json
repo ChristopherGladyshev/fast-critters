@@ -1,6 +1,6 @@
 {
   "name": "fast-critters",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Drop-in critters replacement for Next.js optimizeCss: Rust port, ~30x faster, byte-for-byte identical output",
   "keywords": [
     "critters",
