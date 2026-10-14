@@ -243,11 +243,31 @@ fn css_asset_path(href: &str, options: &Options) -> Result<Option<String>, Strin
         return Ok(None);
     }
 
+    if cfg!(windows) {
+        return win32_asset_path(options.path, normalized)
+            .map(Some)
+            .ok_or_else(|| format!("stylesheet path needs path.resolve: {href}"));
+    }
     let filename = format!("{}/{}", options.path, normalized);
     if normalized.is_empty() || normalize_path(&filename) != filename || filename.contains('\\') {
         return Err(format!("stylesheet path needs path.resolve: {href}"));
     }
     Ok(Some(filename))
+}
+
+/// `path.win32.resolve(base, normalized)` для простого случая: `base` — нормализованный
+/// абсолютный путь с диском (`C:\app\.next`), `normalized` — сегменты без `.`/`..`.
+/// Тогда resolve — склейка через `\`, а `isSubpath` истинен. Остальное — `None` (JS).
+fn win32_asset_path(base: &str, normalized: &str) -> Option<String> {
+    let bytes = base.as_bytes();
+    let has_drive =
+        bytes.len() > 3 && bytes[0].is_ascii_alphabetic() && bytes[1] == b':' && bytes[2] == b'\\';
+    let clean =
+        |path: &str, sep: char| path.split(sep).all(|part| !matches!(part, "" | "." | ".."));
+    let base_ok = has_drive && !base[2..].contains(['/', ':']) && clean(&base[3..], '\\');
+    let rest_ok =
+        !normalized.is_empty() && !normalized.contains(['\\', ':']) && clean(normalized, '/');
+    (base_ok && rest_ok).then(|| format!("{base}\\{}", normalized.replace('/', "\\")))
 }
 
 /// Схлопывает сегменты `//`, `.` и `..`; для уже нормализованного пути совпадает со входом.
@@ -350,6 +370,24 @@ mod tests {
             public_path: "https://cdn.example/_next/",
         };
         assert!(css_asset_path("/_next/static/a.css", &prefixed).is_ok());
+    }
+
+    #[test]
+    fn resolves_win32_asset_paths() {
+        assert_eq!(
+            win32_asset_path(r"C:\app\.next", "static/css/a.css").as_deref(),
+            Some(r"C:\app\.next\static\css\a.css")
+        );
+        assert_eq!(win32_asset_path(r"C:\app\.next", "static/../a.css"), None);
+        assert_eq!(win32_asset_path(r"C:\app\.next", "static//a.css"), None);
+        assert_eq!(win32_asset_path(r"C:\app\.next", r"static\a.css"), None);
+        assert_eq!(win32_asset_path(r"C:\app\.next", "c:a.css"), None);
+        assert_eq!(win32_asset_path(r"C:\app\.next\", "a.css"), None);
+        assert_eq!(win32_asset_path(r"C:\app\..\.next", "a.css"), None);
+        assert_eq!(win32_asset_path(r"C:\", "a.css"), None);
+        assert_eq!(win32_asset_path("C:/app", "a.css"), None);
+        assert_eq!(win32_asset_path(r"\\server\share", "a.css"), None);
+        assert_eq!(win32_asset_path("/app/.next", "a.css"), None);
     }
 
     #[test]

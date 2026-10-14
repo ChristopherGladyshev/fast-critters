@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 
 import { PACKAGE_NAME } from './core/native';
@@ -56,7 +56,8 @@ function apply(config: TNextConfig, options: IWithFastCrittersOptions) {
   const includes = { ...config.outputFileTracingIncludes };
   if (isPort) {
     // Аддон грузится по вычисленному пути, трассировка standalone его не видит.
-    const bin = `${relative(dir, installed as string).split('\\').join('/')}/bin/*.node`;
+    // require.resolve отдаёт realpath, поэтому и dir через realpath (на macOS /var → /private/var).
+    const bin = `${relative(realpathSync(dir), installed as string).split('\\').join('/')}/bin/*.node`;
     includes[ALL_ROUTES] = [...(includes[ALL_ROUTES] ?? []), bin];
   }
 
