@@ -1,0 +1,14 @@
+[
+ [
+  "warn",
+  "Unable to locate stylesheet: <DIR>/static/css/missing.css"
+ ],
+ [
+  "info",
+  "\u001b[32mInlined 64 bytes (41% of original 153 bytes) of _next/static/css/a.css.\u001b[39m"
+ ],
+ [
+  "info",
+  "\u001b[32mInlined 64 bytes (41% of original 153 bytes) of _next/static/css/a.css.\u001b[39m"
+ ]
+]

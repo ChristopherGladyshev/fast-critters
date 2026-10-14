@@ -1,0 +1,15 @@
+{
+  "name": "fast-critters-example-next-pages",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "build:webpack": "next build --webpack",
+    "start": "next start -p 3123"
+  },
+  "dependencies": {
+    "critters": "file:../../fast-critters-0.1.0.tgz",
+    "next": "16.2.2",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  }
+}

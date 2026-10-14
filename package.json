@@ -1,0 +1,74 @@
+{
+  "name": "fast-critters",
+  "version": "0.1.0",
+  "description": "Drop-in замена critters для Next.js experimental.optimizeCss: Rust-порт (napi) байт-в-байт с critters 0.0.23, JS-фолбэк FastCritters, плагин webpack",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./next": {
+      "types": "./dist/next.d.ts",
+      "default": "./dist/next.js"
+    },
+    "./webpack": {
+      "types": "./dist/webpack.d.ts",
+      "default": "./dist/webpack.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "default": "./dist/core/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "dist",
+    "bin/*.node"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "build:native": "node scripts/build-native.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:native": "cargo test --manifest-path native/Cargo.toml --workspace --exclude critters-rs",
+    "lint:native": "cargo fmt --manifest-path native/Cargo.toml --all --check && cargo clippy --manifest-path native/Cargo.toml --workspace --all-targets -- -D warnings",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "critters-upstream": "npm:critters@0.0.23"
+  },
+  "peerDependencies": {
+    "next": ">=14",
+    "webpack": "^5"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    },
+    "webpack": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "css-loader": "^7.1.5",
+    "css-what": "^6.2.2",
+    "dom-serializer": "^2.0.0",
+    "html-webpack-plugin": "^5.6.8",
+    "htmlparser2": "^8.0.2",
+    "mini-css-extract-plugin": "^2.10.2",
+    "postcss": "^8.5.8",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7",
+    "webpack": "^5.111.1"
+  }
+}

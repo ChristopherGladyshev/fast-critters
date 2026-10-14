@@ -1,0 +1,10 @@
+[
+ [
+  "warn",
+  "3 rules skipped due to selector errors:\n  .a:unknownfn(1) -> Unknown pseudo-class :unknownfn\n  .a:nth-child(foo) -> n-th rule couldn't be parsed ('foo')\n  [constructor^=x] -> _a.startsWith is not a function"
+ ],
+ [
+  "warn",
+  "Merging inline stylesheets into a single <style> tag skipped, no inline stylesheets to merge"
+ ]
+]

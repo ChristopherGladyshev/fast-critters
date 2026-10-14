@@ -1,0 +1,434 @@
+[
+ {
+  "css": ".a , .b { color : red ; }",
+  "seed": -1
+ },
+ {
+  "css": "a{color:red;/* c */}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:1;c:\"</style>\";}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c;;}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c};;b{d:e};",
+  "seed": -1
+ },
+ {
+  "css": "a{*zoom:1;_height:2px}",
+  "seed": -1
+ },
+ {
+  "css": "a{$&x:1;y$$:2;$`z :3}",
+  "seed": -1
+ },
+ {
+  "css": "@import \"a\";a{b:c}",
+  "seed": -2
+ },
+ {
+  "css": "@import \"a\";a{b:c}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c}@foo bar /* c */",
+  "seed": -1
+ },
+ {
+  "css": "@media (x){a{b:c}}",
+  "seed": -2
+ },
+ {
+  "css": "@media (x) {a{b:c}}@media  {}",
+  "seed": -1
+ },
+ {
+  "css": "@keyframes fadeIn{from{opacity:0}}a{animation:fadeIn 1s}",
+  "seed": -1
+ },
+ {
+  "css": "@keyframes fadeIn{from{opacity:0}}a{animation:fadeIn 1s}",
+  "seed": -2
+ },
+ {
+  "css": "@-webkit-keyframes x{from{a:b}}",
+  "seed": -2
+ },
+ {
+  "css": "@KEYFRAMES Foo{from{a:b}to{c:d}}",
+  "seed": 1
+ },
+ {
+  "css": "@font-face{font-family:x;src:url(a.woff2)}a{b:c}",
+  "seed": -1
+ },
+ {
+  "css": "@font-face;",
+  "seed": -1
+ },
+ {
+  "css": "/*critters:include*/.x{a:b}",
+  "seed": -2
+ },
+ {
+  "css": "/*critters:exclude*/.x{a:b}",
+  "seed": -1
+ },
+ {
+  "css": "/*critters:include start*/.x{a:b}.y{c:d}/*critters:include end*/.z{e:f}",
+  "seed": -2
+ },
+ {
+  "css": "/*! critters:include */.x{a:b}/* critters:include */.y{c:d}",
+  "seed": -2
+ },
+ {
+  "css": "a,b\\,c,d{x:y}",
+  "seed": -1
+ },
+ {
+  "css": "/*critters:include*/a\\ ,b{x:y}",
+  "seed": -1
+ },
+ {
+  "css": "/*critters:include*/q{p a ~ b,*a::before, ,.p{x:y}}",
+  "seed": -1
+ },
+ {
+  "css": ":is(.a, :focus) a:not(:hover)::before,::after,:root{x:y}",
+  "seed": 5
+ },
+ {
+  "css": "a:not( ),.x\\:hover,.y::-webkit-scrollbar,:is(,.a),a:has(> b){x:y}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c!important;d:e ! important;f:g !IMPORTANT;h:i/**/!important }",
+  "seed": -1
+ },
+ {
+  "css": "a{--x:{a:b;c:d};--y: 1px ;}",
+  "seed": -1
+ },
+ {
+  "css": "a{background:url(data:image/png;base64,xx==);c:url( \"a b\" )}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c}}",
+  "seed": -1
+ },
+ {
+  "css": "a{",
+  "seed": -1
+ },
+ {
+  "css": "\"x",
+  "seed": -1
+ },
+ {
+  "css": "/* x",
+  "seed": -1
+ },
+ {
+  "css": "a{b}",
+  "seed": -1
+ },
+ {
+  "css": "a{color:red background:blue}",
+  "seed": -1
+ },
+ {
+  "css": "a{filter:progid:DX(a:b)}",
+  "seed": -1
+ },
+ {
+  "css": "﻿a{b:c}",
+  "seed": -1
+ },
+ {
+  "css": "",
+  "seed": -1
+ },
+ {
+  "css": "  \n",
+  "seed": -1
+ },
+ {
+  "css": ".\\😀x,.\\😀 .y{a:b}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:url\\😀(x y)}",
+  "seed": -1
+ },
+ {
+  "css": "a{color:red;b{c:d}}",
+  "seed": 3
+ },
+ {
+  "css": "@media x{a{b:c}/*critters:include*/}b{c:d}",
+  "seed": -2
+ },
+ {
+  "css": "a{b:c;/**/}a{;b:c}",
+  "seed": -1
+ },
+ {
+  "css": "a/**/,b /* c */{c:d}",
+  "seed": -1
+ },
+ {
+  "css": "@layer a, b;@layer x{a{b:c}}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c}x:y",
+  "seed": -1
+ },
+ {
+  "css": "@ x{}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c;d:\"</style>\"}",
+  "seed": -1
+ },
+ {
+  "css": "@media x  {a{b:c}}@supports (a:b)\n\t{c{d:e}}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:url (x;y)}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:url(x\\\\)y)}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:\\😀:c}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c\\😀}",
+  "seed": -1
+ },
+ {
+  "css": "\\😀{b:c}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:url\\😀 (x)}",
+  "seed": -1
+ },
+ {
+  "css": "😀{x:\"</style>\";}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:red ! important /**/;}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:red !/**/important}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:! important}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:x !ie important}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:red!important!important}",
+  "seed": -1
+ },
+ {
+  "css": "a{filter:progid:a:b}",
+  "seed": -1
+ },
+ {
+  "css": "a{--x:{a:{b:c}}}",
+  "seed": -1
+ },
+ {
+  "css": "a{--x: ;}",
+  "seed": -1
+ },
+ {
+  "css": "a{--x:/*c*/}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:/*c*/}",
+  "seed": -1
+ },
+ {
+  "css": "a{b: /*c*/ x /*d*/ }",
+  "seed": -1
+ },
+ {
+  "css": "a{b:x/*c*/,/*d*/y}",
+  "seed": -1
+ },
+ {
+  "css": "a{\"s\"x:y}",
+  "seed": -1
+ },
+ {
+  "css": "a{(a)b:c}",
+  "seed": -1
+ },
+ {
+  "css": "a{:a}",
+  "seed": -1
+ },
+ {
+  "css": "a{_:x}",
+  "seed": -1
+ },
+ {
+  "css": "a{*:x}",
+  "seed": -1
+ },
+ {
+  "css": "@media{}a{b:c}",
+  "seed": -1
+ },
+ {
+  "css": "@media x;a{b:c}",
+  "seed": -1
+ },
+ {
+  "css": "a{@media x{b{c:d}}}",
+  "seed": 2
+ },
+ {
+  "css": "a{b{c:d}e:f}",
+  "seed": -1
+ },
+ {
+  "css": "{a:b}",
+  "seed": -1
+ },
+ {
+  "css": "/*critters:include*/{a:b}",
+  "seed": -1
+ },
+ {
+  "css": ".a\\\\,.b{c:d}",
+  "seed": 3
+ },
+ {
+  "css": ".a\\\\ ,.b{c:d}",
+  "seed": 7
+ },
+ {
+  "css": "\"a,b\",c{d:e}",
+  "seed": 9
+ },
+ {
+  "css": "a(b,c),d{e:f}",
+  "seed": 11
+ },
+ {
+  "css": "a,b{c:d}",
+  "seed": 13
+ },
+ {
+  "css": "a, b , c{d:e}",
+  "seed": -1
+ },
+ {
+  "css": "@font-face{font-family:x}@media x{@font-face;}",
+  "seed": -1
+ },
+ {
+  "css": "/*critters:exclude*/a{@font-face;}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c}@media x{@font-face{}}",
+  "seed": -1
+ },
+ {
+  "css": "@media x{/*critters:include*/}a{b:c}",
+  "seed": -2
+ },
+ {
+  "css": "@keyframes a{from{b:c}}@keyframes  a {from{b:c}}x{animation:a}",
+  "seed": -1
+ },
+ {
+  "css": "@keyframes a/**/{from{b:c}}x{animation-name:a}",
+  "seed": -1
+ },
+ {
+  "css": "x{animation:\na\t1s}@keyframes a{0%{b:c}}",
+  "seed": -1
+ },
+ {
+  "css": "x{Animation:a}@keyframes a{0%{b:c}}",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c}/* x */",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c} ; ",
+  "seed": -1
+ },
+ {
+  "css": "a{b:c};b{c:d}",
+  "seed": -2
+ },
+ {
+  "css": "@charset \"x\";",
+  "seed": -1
+ },
+ {
+  "css": "@foo",
+  "seed": -1
+ },
+ {
+  "css": "@foo ",
+  "seed": -1
+ },
+ {
+  "css": "@foo /*x*/",
+  "seed": -1
+ },
+ {
+  "css": ":root{--a:1}html{b:c}body{d:e}::before{f:g}:after{h:i}",
+  "seed": -2
+ },
+ {
+  "css": "a::before:hover,b:not( ){c:d}",
+  "seed": -2
+ },
+ {
+  "css": "a{b:c;} b{c:d}",
+  "seed": -1
+ },
+ {
+  "css": "a {b:c}",
+  "seed": -1
+ },
+ {
+  "css": "a{b :c}",
+  "seed": -1
+ },
+ {
+  "css": "a:is(b,c),d{e:f}",
+  "seed": -1
+ }
+]

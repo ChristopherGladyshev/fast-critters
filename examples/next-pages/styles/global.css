@@ -1,0 +1,4 @@
+.hero { color: red; }
+.hero > p { margin: 0; }
+.footer-unused { color: blue; }
+@media (min-width: 600px) { .hero { padding: 8px; } .never { color: green; } }
