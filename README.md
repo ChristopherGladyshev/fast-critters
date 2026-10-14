@@ -1,5 +1,13 @@
 # fast-critters
 
+[![npm version](https://img.shields.io/npm/v/fast-critters.svg)](https://www.npmjs.com/package/fast-critters)
+[![npm downloads](https://img.shields.io/npm/dm/fast-critters.svg)](https://www.npmjs.com/package/fast-critters)
+[![CI](https://github.com/ChristopherGladyshev/fast-critters/actions/workflows/ci.yml/badge.svg)](https://github.com/ChristopherGladyshev/fast-critters/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/npm/l/fast-critters.svg)](LICENSE)
+[![node](https://img.shields.io/node/v/fast-critters.svg)](https://nodejs.org)
+[![Next.js](https://img.shields.io/badge/Next.js-14%20%7C%2015%20%7C%2016-black?logo=next.js)](https://nextjs.org)
+[![Rust](https://img.shields.io/badge/core-Rust-orange?logo=rust)](native)
+
 **English** · [Русский](README.ru.md) · [中文](README.zh-CN.md)
 
 > ### 🚀 +10–20 Lighthouse Performance points for your Next.js app
@@ -137,3 +145,5 @@ Build, tests, Rust crate layout and the equivalence oracles are covered in
 ## License
 
 [MIT](LICENSE)
+
+<sub>Keywords: `critters` · `critters-alternative` · `critters-replacement` · `beasties` · `critical-css` · `critical` · `inline-css` · `css-inline` · `inline-critical-css` · `above-the-fold` · `render-blocking` · `render-blocking-css` · `css-optimization` · `optimize-css` · `optimizeCss` · `nextjs` · `next` · `next.js` · `nextjs-plugin` · `pages-router` · `ssr` · `server-side-rendering` · `lighthouse` · `core-web-vitals` · `web-vitals` · `fcp` · `lcp` · `pagespeed` · `page-speed` · `performance` · `web-performance` · `seo` · `rust` · `napi` · `napi-rs` · `native-addon` · `webpack` · `webpack-plugin` · `html-webpack-plugin` · `turbopack` · `css` · `html` · `postcss` · `fast` · `speed`</sub>

@@ -1,5 +1,13 @@
 # fast-critters
 
+[![npm version](https://img.shields.io/npm/v/fast-critters.svg)](https://www.npmjs.com/package/fast-critters)
+[![npm downloads](https://img.shields.io/npm/dm/fast-critters.svg)](https://www.npmjs.com/package/fast-critters)
+[![CI](https://github.com/ChristopherGladyshev/fast-critters/actions/workflows/ci.yml/badge.svg)](https://github.com/ChristopherGladyshev/fast-critters/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/npm/l/fast-critters.svg)](LICENSE)
+[![node](https://img.shields.io/node/v/fast-critters.svg)](https://nodejs.org)
+[![Next.js](https://img.shields.io/badge/Next.js-14%20%7C%2015%20%7C%2016-black?logo=next.js)](https://nextjs.org)
+[![Rust](https://img.shields.io/badge/core-Rust-orange?logo=rust)](native)
+
 [English](README.md) · [Русский](README.ru.md) · **中文**
 
 > ### 🚀 为你的 Next.js 应用提升 10–20 分 Lighthouse Performance
@@ -130,3 +138,5 @@ Turbopack 没有处理 HTML 的插件 API，因此在 Next.js 之外不支持 Tu
 ## 许可证
 
 [MIT](LICENSE)
+
+<sub>Keywords: `critters` · `critters-alternative` · `critters-replacement` · `beasties` · `critical-css` · `critical` · `inline-css` · `css-inline` · `inline-critical-css` · `above-the-fold` · `render-blocking` · `render-blocking-css` · `css-optimization` · `optimize-css` · `optimizeCss` · `nextjs` · `next` · `next.js` · `nextjs-plugin` · `pages-router` · `ssr` · `server-side-rendering` · `lighthouse` · `core-web-vitals` · `web-vitals` · `fcp` · `lcp` · `pagespeed` · `page-speed` · `performance` · `web-performance` · `seo` · `rust` · `napi` · `napi-rs` · `native-addon` · `webpack` · `webpack-plugin` · `html-webpack-plugin` · `turbopack` · `css` · `html` · `postcss` · `fast` · `speed`</sub>
