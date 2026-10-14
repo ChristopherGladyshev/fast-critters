@@ -57,7 +57,12 @@ struct External {
 }
 
 pub fn process(html: &str, options: &Options, files: &FileCache) -> Outcome {
-    if !options.path.starts_with('/') || normalize_path(options.path) != options.path {
+    let path_ok = if cfg!(windows) {
+        is_win32_base(options.path)
+    } else {
+        options.path.starts_with('/') && normalize_path(options.path) == options.path
+    };
+    if !path_ok {
         fallback!("options.path is not an absolute normalized path");
     }
 
@@ -259,15 +264,24 @@ fn css_asset_path(href: &str, options: &Options) -> Result<Option<String>, Strin
 /// абсолютный путь с диском (`C:\app\.next`), `normalized` — сегменты без `.`/`..`.
 /// Тогда resolve — склейка через `\`, а `isSubpath` истинен. Остальное — `None` (JS).
 fn win32_asset_path(base: &str, normalized: &str) -> Option<String> {
-    let bytes = base.as_bytes();
-    let has_drive =
-        bytes.len() > 3 && bytes[0].is_ascii_alphabetic() && bytes[1] == b':' && bytes[2] == b'\\';
-    let clean =
-        |path: &str, sep: char| path.split(sep).all(|part| !matches!(part, "" | "." | ".."));
-    let base_ok = has_drive && !base[2..].contains(['/', ':']) && clean(&base[3..], '\\');
     let rest_ok =
-        !normalized.is_empty() && !normalized.contains(['\\', ':']) && clean(normalized, '/');
-    (base_ok && rest_ok).then(|| format!("{base}\\{}", normalized.replace('/', "\\")))
+        !normalized.is_empty() && !normalized.contains(['\\', ':']) && is_clean(normalized, '/');
+    (is_win32_base(base) && rest_ok).then(|| format!("{base}\\{}", normalized.replace('/', "\\")))
+}
+
+/// Нормализованный абсолютный путь с диском: `C:\app\.next` (без `/`, `.`/`..`, пустых сегментов).
+fn is_win32_base(base: &str) -> bool {
+    let bytes = base.as_bytes();
+    bytes.len() > 3
+        && bytes[0].is_ascii_alphabetic()
+        && bytes[1] == b':'
+        && bytes[2] == b'\\'
+        && !base[2..].contains(['/', ':'])
+        && is_clean(&base[3..], '\\')
+}
+
+fn is_clean(path: &str, sep: char) -> bool {
+    path.split(sep).all(|part| !matches!(part, "" | "." | ".."))
 }
 
 /// Схлопывает сегменты `//`, `.` и `..`; для уже нормализованного пути совпадает со входом.
