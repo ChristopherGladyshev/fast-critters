@@ -63,9 +63,17 @@ node oracle/pipeline-golden.mjs      # пересобрать crates/critters/te
 Версии JS-библиотек закреплены тестами: при обновлении critters / postcss /
 css-select / htmlparser2 пересобрать golden-файлы оракулами и прогнать фазз.
 
-## Публикация
+## CI и публикация
 
-Пока `"private": true`: публикация не настроена. Для публикации в npm убрать
-`private` и собрать аддоны под целевые платформы (как минимум `linux-x64-gnu`
-и `linux-x64-musl`).
-Сейчас `bin/` содержит только аддон текущей машины.
+`.github/workflows/ci.yml`: проверки, сборка аддона под 8 платформ
+(linux через `cargo zigbuild`, glibc 2.17), тесты на каждой платформе с
+`CRITTERS_REQUIRE_ADDON=true` (без аддона тесты падают, а не пропускаются).
+
+Публикация — по тегу `v*` через npm trusted publishing (OIDC, без токена):
+
+```bash
+npm version patch        # 0.1.0 → 0.1.1, коммит и тег
+git push --follow-tags   # CI собирает, тестирует и публикует
+```
+
+Кросс-сборка локально: `node scripts/build-native.mjs --target <triple> [--zig]`.

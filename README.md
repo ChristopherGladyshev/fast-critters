@@ -127,6 +127,7 @@ Turbopack has no plugin API for HTML, so outside Next.js it isn't supported.
 
 - Node.js ≥ 20
 - Next.js ≥ 14 (Pages Router) or webpack 5
+- Prebuilt Rust addon: Linux x64/arm64 (glibc ≥ 2.17 and musl/Alpine), macOS x64/arm64, Windows x64/arm64. Other platforms use the JS fallback.
 
 ## Contributing
 

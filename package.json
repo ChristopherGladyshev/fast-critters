@@ -56,7 +56,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "build": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
     "build:native": "node scripts/build-native.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",

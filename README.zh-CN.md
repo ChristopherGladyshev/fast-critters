@@ -120,6 +120,7 @@ Turbopack 没有处理 HTML 的插件 API，因此在 Next.js 之外不支持 Tu
 
 - Node.js ≥ 20
 - Next.js ≥ 14（Pages Router）或 webpack 5
+- 预编译 Rust 原生模块：Linux x64/arm64（glibc ≥ 2.17 及 musl/Alpine）、macOS x64/arm64、Windows x64/arm64。其他平台使用 JS 回退。
 
 ## 参与开发
 

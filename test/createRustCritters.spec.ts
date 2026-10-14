@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { createRustCritters } from '../src/core/createRustCritters';
 import { loadCritters } from '../src/core/loadCritters';
 import { loadNative } from '../src/core/loadFastCritters';
-import { findBundledBinary } from '../src/core/native';
+import { findBundledBinary, nativeBinaryName } from '../src/core/native';
 
 import type {
   INativeCritters,
@@ -163,6 +163,10 @@ describe('createRustCritters', () => {
 
 // Собранный аддон (`npm run build:native`) против штатного critters.
 const addonPath = process.env.CRITTERS_NATIVE_PATH || findBundledBinary() || '';
+// В CI аддон обязателен: без него тесты не должны молча пропускаться.
+if (process.env.CRITTERS_REQUIRE_ADDON === 'true' && !existsSync(addonPath)) {
+  throw new Error(`addon not found: bin/${nativeBinaryName()}`);
+}
 const describeAddon = existsSync(addonPath) ? describe : describe.skip;
 
 describeAddon('critters-rs addon', () => {

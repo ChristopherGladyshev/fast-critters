@@ -1,0 +1,138 @@
+# Проверки, сборка аддона под все платформы, тесты на каждой и публикация в npm по тегу v*.
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: native
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint:native
+      - run: npm run test:native
+
+  build:
+    name: build ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: linux-x64-gnu, os: ubuntu-latest, target: x86_64-unknown-linux-gnu, zig: true }
+          - { name: linux-arm64-gnu, os: ubuntu-latest, target: aarch64-unknown-linux-gnu, zig: true }
+          - { name: linux-x64-musl, os: ubuntu-latest, target: x86_64-unknown-linux-musl, zig: true }
+          - { name: linux-arm64-musl, os: ubuntu-latest, target: aarch64-unknown-linux-musl, zig: true }
+          - { name: darwin-x64, os: macos-latest, target: x86_64-apple-darwin }
+          - { name: darwin-arm64, os: macos-latest, target: aarch64-apple-darwin }
+          - { name: win32-x64, os: windows-latest, target: x86_64-pc-windows-msvc }
+          - { name: win32-arm64, os: windows-latest, target: aarch64-pc-windows-msvc }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: native
+          key: ${{ matrix.target }}
+      - if: matrix.zig
+        run: pip3 install cargo-zigbuild
+      - run: node scripts/build-native.mjs --target ${{ matrix.target }} ${{ matrix.zig && '--zig' || '' }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: addon-${{ matrix.name }}
+          path: bin/fast-critters.${{ matrix.name }}.node
+          if-no-files-found: error
+
+  test:
+    name: test ${{ matrix.name }}
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: linux-x64-gnu, os: ubuntu-latest }
+          - { name: linux-arm64-gnu, os: ubuntu-24.04-arm }
+          - { name: linux-x64-musl, os: ubuntu-latest, alpine: true }
+          - { name: linux-arm64-musl, os: ubuntu-24.04-arm, alpine: true }
+          - { name: darwin-x64, os: macos-15-intel }
+          - { name: darwin-arm64, os: macos-latest }
+          - { name: win32-x64, os: windows-latest }
+          - { name: win32-arm64, os: windows-11-arm }
+    env:
+      CRITTERS_REQUIRE_ADDON: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: addon-${{ matrix.name }}
+          path: bin
+      # Alpine: actions внутри musl-контейнера не работают на arm64, поэтому docker run.
+      - if: matrix.alpine
+        run: >
+          docker run --rm -v "$PWD:/w" -w /w -e CRITTERS_REQUIRE_ADDON
+          node:22-alpine sh -c "npm ci && npm run build && npm test"
+      - if: '!matrix.alpine'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - if: '!matrix.alpine'
+        run: npm ci
+      - if: '!matrix.alpine'
+        run: npm run build
+      - if: '!matrix.alpine'
+        run: npm test
+
+  publish:
+    needs: [check, test]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # trusted publishing + provenance
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@11
+      - name: Tag matches package.json
+        run: |
+          version=$(node -p "require('./package.json').version")
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME != v$version"; exit 1; }
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: addon-*
+          path: bin
+          merge-multiple: true
+      - name: All 8 addons present
+        run: ls -l bin && test "$(ls bin/*.node | wc -l)" -eq 8
+      - run: npm ci
+      - run: npm publish --provenance --access public

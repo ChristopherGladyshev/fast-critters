@@ -127,6 +127,7 @@ module.exports = {
 
 - Node.js ≥ 20
 - Next.js ≥ 14 (Pages Router) или webpack 5
+- Готовый Rust-аддон: Linux x64/arm64 (glibc ≥ 2.17 и musl/Alpine), macOS x64/arm64, Windows x64/arm64. На остальных платформах работает JS-фолбэк.
 
 ## Разработка
 
