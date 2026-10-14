@@ -1,9 +1,29 @@
 {
   "name": "fast-critters",
   "version": "0.1.0",
-  "description": "Drop-in замена critters для Next.js experimental.optimizeCss: Rust-порт (napi) байт-в-байт с critters 0.0.23, JS-фолбэк FastCritters, плагин webpack",
+  "description": "Drop-in critters replacement for Next.js optimizeCss: Rust port, ~30x faster, byte-for-byte identical output",
+  "keywords": [
+    "critters",
+    "critical-css",
+    "nextjs",
+    "next",
+    "optimizeCss",
+    "lighthouse",
+    "performance",
+    "rust",
+    "napi",
+    "webpack"
+  ],
+  "author": "Christopher Gladyshev <timon5551@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristopherGladyshev/fast-critters.git"
+  },
+  "homepage": "https://github.com/ChristopherGladyshev/fast-critters#readme",
+  "bugs": {
+    "url": "https://github.com/ChristopherGladyshev/fast-critters/issues"
+  },
   "license": "MIT",
-  "private": true,
   "main": "index.js",
   "types": "index.d.ts",
   "exports": {
@@ -29,7 +49,8 @@
     "index.js",
     "index.d.ts",
     "dist",
-    "bin/*.node"
+    "bin/*.node",
+    "README.*.md"
   ],
   "engines": {
     "node": ">=20"
