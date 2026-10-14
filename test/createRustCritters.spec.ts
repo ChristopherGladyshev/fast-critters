@@ -196,6 +196,7 @@ describeAddon('critters-rs addon', () => {
       publicPath: '/_next/',
     });
 
+    expect(result.fallback).toBeUndefined();
     expect(result.html).toBe(expected);
     await expect(new Rust(options).process(html)).resolves.toBe(expected);
   });
