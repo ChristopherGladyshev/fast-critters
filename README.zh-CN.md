@@ -7,6 +7,7 @@
 [![node](https://img.shields.io/node/v/fast-critters.svg)](https://nodejs.org)
 [![Next.js](https://img.shields.io/badge/Next.js-14%20%7C%2015%20%7C%2016-black?logo=next.js)](https://nextjs.org)
 [![Rust](https://img.shields.io/badge/core-Rust-orange?logo=rust)](native)
+[![GitHub stars](https://img.shields.io/github/stars/ChristopherGladyshev/fast-critters?style=social)](https://github.com/ChristopherGladyshev/fast-critters)
 
 [English](README.md) · [Русский](README.ru.md) · **中文**
 
@@ -129,6 +130,11 @@ Turbopack 没有处理 HTML 的插件 API，因此在 Next.js 之外不支持 Tu
 - Node.js ≥ 20
 - Next.js ≥ 14（Pages Router）或 webpack 5
 - 预编译 Rust 原生模块：Linux x64/arm64（glibc ≥ 2.17 及 musl/Alpine）、macOS x64/arm64、Windows x64/arm64。其他平台使用 JS 回退。
+
+## 支持
+
+如果你在使用 fast-critters，欢迎在 [GitHub 上点个 Star](https://github.com/ChristopherGladyshev/fast-critters) ⭐，
+这能帮助更多人发现这个项目。
 
 ## 参与开发
 

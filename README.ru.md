@@ -7,6 +7,7 @@
 [![node](https://img.shields.io/node/v/fast-critters.svg)](https://nodejs.org)
 [![Next.js](https://img.shields.io/badge/Next.js-14%20%7C%2015%20%7C%2016-black?logo=next.js)](https://nextjs.org)
 [![Rust](https://img.shields.io/badge/core-Rust-orange?logo=rust)](native)
+[![GitHub stars](https://img.shields.io/github/stars/ChristopherGladyshev/fast-critters?style=social)](https://github.com/ChristopherGladyshev/fast-critters)
 
 [English](README.md) · **Русский** · [中文](README.zh-CN.md)
 
@@ -136,6 +137,11 @@ module.exports = {
 - Node.js ≥ 20
 - Next.js ≥ 14 (Pages Router) или webpack 5
 - Готовый Rust-аддон: Linux x64/arm64 (glibc ≥ 2.17 и musl/Alpine), macOS x64/arm64, Windows x64/arm64. На остальных платформах работает JS-фолбэк.
+
+## Поддержка
+
+Если вы пользуетесь fast-critters, поставьте [звезду на GitHub](https://github.com/ChristopherGladyshev/fast-critters) ⭐.
+Так проект проще найти другим.
 
 ## Разработка
 
